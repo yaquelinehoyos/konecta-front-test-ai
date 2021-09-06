@@ -68,10 +68,10 @@ export default {
 }
 
 @media (max-width: 650px) {
-    .character-pokemon {
-        width: 300px;
-        height: auto;
-        flex-direction: column;
-    }
+  .character-pokemon {
+    width: 300px;
+    height: auto;
+    flex-direction: column;
+  }
 }
 </style>
