@@ -1,8 +1,20 @@
 <template>
   <div id="app">
+    <Header />
     <router-view />
   </div>
 </template>
+
+<script>
+import Header from "@/components/Header.vue";
+
+export default {
+  name: "AppPokemon",
+  components: {
+    Header
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -10,6 +22,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: $color-main;
+  color: $color-light-gray;
+  background-color: $color-dark-gray;
 }
 </style>
