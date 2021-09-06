@@ -11,9 +11,9 @@ import Header from "@/components/Header.vue";
 export default {
   name: "AppPokemon",
   components: {
-    Header
-  }
-}
+    Header,
+  },
+};
 </script>
 
 <style lang="scss">

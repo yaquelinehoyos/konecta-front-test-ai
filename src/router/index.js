@@ -19,12 +19,12 @@ const routes = [
   {
     path: "/404",
     name: "NotFound",
-    component: () => import(`@/views/NotFound/Index.vue`)
+    component: () => import(`@/views/NotFound/Index.vue`),
   },
   {
     path: "*",
-    redirect: "/404"
-  }
+    redirect: "/404",
+  },
 ];
 
 const router = new VueRouter({

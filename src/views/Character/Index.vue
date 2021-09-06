@@ -1,11 +1,11 @@
 <template>
-    <div class="character-pokemon">
-        <h1>CHARACTER POKEMON</h1>
-    </div>
+  <div class="character-pokemon">
+    <h1>CHARACTER POKEMON</h1>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "CharacterPokemon",
-}
+  name: "CharacterPokemon",
+};
 </script>
