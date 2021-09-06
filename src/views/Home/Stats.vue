@@ -24,7 +24,7 @@ export default {
 .stats-pokemon {
   width: 100%;
   padding: 10px;
-  color: #9E9E9E;
+  color: #9e9e9e;
 
   &__container {
     display: flex;

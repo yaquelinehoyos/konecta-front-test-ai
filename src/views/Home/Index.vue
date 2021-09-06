@@ -1,6 +1,9 @@
 <template>
   <div class="homepage-pokemon">
-    <h1 class="homepage-pokemon__title">DESTACADOS</h1>
+    <Paginator
+      @paginate="paginateHandler"
+      class="homepage-pokemon__paginator"
+    />
     <div class="homepage-pokemon__characters-content">
       <Character
         class="homepage-pokemon__character"
@@ -9,16 +12,22 @@
         :character="character.data"
       />
     </div>
+    <Paginator
+      @paginate="paginateHandler"
+      class="homepage-pokemon__paginator"
+    />
   </div>
 </template>
 
 <script>
 import Character from "./Character.vue";
+import Paginator from "./Paginator.vue";
 
 export default {
   name: "HomepagePokemon",
   components: {
     Character,
+    Paginator,
   },
   data() {
     return {
@@ -26,28 +35,56 @@ export default {
     };
   },
   async created() {
-    let payload = {
-      limit: 10,
-    };
-    let characters = await this.$store.dispatch(
-      "characters/getCharacters",
-      payload
-    );
-    let promisesCharacter = [];
-    for (let item of characters) {
-      promisesCharacter.push(
-        this.$store.dispatch("characters/getSingleCharacter", item.name)
-      );
+    if (this.$route.params.page) {
+      this.getCharacters(this.$route.params.page);
+    } else {
+      this.getCharacters(1);
     }
-    let allPromise = Promise.all(promisesCharacter);
-    allPromise
-      .then((values) => {
-        values;
-        this.charactersList = values;
-      })
-      .catch((error) => {
-        error;
-      });
+  },
+  methods: {
+    async getCharacters(i) {
+      await this.setRoute(i);
+      let payload = {
+        limit: 10,
+        offset: i * 10,
+      };
+      let characters = await this.$store.dispatch(
+        "characters/getCharacters",
+        payload
+      );
+      let promisesCharacter = [];
+      for (let item of characters) {
+        promisesCharacter.push(
+          this.$store.dispatch("characters/getSingleCharacter", item.name)
+        );
+      }
+      let allPromise = Promise.all(promisesCharacter);
+      allPromise
+        .then((values) => {
+          values;
+          this.charactersList = values;
+        })
+        .catch((error) => {
+          error;
+        });
+    },
+    paginateHandler(event) {
+      this.getCharacters(event);
+    },
+    setRoute(page) {
+      this.$router
+        .push({ name: "Home", params: { page: page } })
+        .catch((err) => {
+          if (
+            err.name !== "NavigationDuplicated" &&
+            !err.message.includes(
+              "Avoided redundant navigation to current location"
+            )
+          ) {
+            // logError(err);
+          }
+        });
+    },
   },
 };
 </script>
@@ -55,10 +92,6 @@ export default {
 <style lang="scss">
 .homepage-pokemon {
   padding: 50px 20px;
-
-  &__title {
-    margin-bottom: 50px;
-  }
 
   &__characters-content {
     display: grid;
@@ -68,6 +101,10 @@ export default {
 
   &__character {
     justify-self: center;
+  }
+
+  &__paginator {
+    margin: 50px 0px;
   }
 }
 

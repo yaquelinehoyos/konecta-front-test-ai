@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/:page?",
     name: "Home",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Home/Index.vue"),
