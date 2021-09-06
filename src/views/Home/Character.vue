@@ -54,15 +54,7 @@ export default {
 .character-pokemon {
   width: 600px;
   height: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: left;
-  background: rgb(60, 62, 68);
-  border-radius: 0.5rem;
-  margin: 0.7rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.6) 0px 2px 4px -1px;
+  @include character-card;
 
   &__img {
     width: 250px;
@@ -73,5 +65,13 @@ export default {
     width: 280px;
     padding: 20px 10px;
   }
+}
+
+@media (max-width: 650px) {
+    .character-pokemon {
+        width: 300px;
+        height: auto;
+        flex-direction: column;
+    }
 }
 </style>
