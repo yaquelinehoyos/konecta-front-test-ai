@@ -1,8 +1,13 @@
 <template>
   <div class="homepage-pokemon">
-    <h1 class="homepage-pokemon__title">POKEMON DESTACADOS</h1>
+    <h1 class="homepage-pokemon__title">DESTACADOS</h1>
     <div class="homepage-pokemon__characters-content">
-      <Character class="homepage-pokemon__character" v-for="character in charactersList" :key="character.data.id" :character="character.data" />
+      <Character
+        class="homepage-pokemon__character"
+        v-for="character in charactersList"
+        :key="character.data.id"
+        :character="character.data"
+      />
     </div>
   </div>
 </template>
@@ -17,26 +22,33 @@ export default {
   },
   data() {
     return {
-      charactersList: null
-    }
+      charactersList: null,
+    };
   },
   async created() {
     let payload = {
-      limit: 10
-    }
-    let characters = await this.$store.dispatch("characters/getCharacters", payload);
-    let promisesCharacter = []
-    for(let item of characters) {
-      promisesCharacter.push(this.$store.dispatch("characters/getSingleCharacter", item.name));
+      limit: 10,
+    };
+    let characters = await this.$store.dispatch(
+      "characters/getCharacters",
+      payload
+    );
+    let promisesCharacter = [];
+    for (let item of characters) {
+      promisesCharacter.push(
+        this.$store.dispatch("characters/getSingleCharacter", item.name)
+      );
     }
     let allPromise = Promise.all(promisesCharacter);
-    allPromise.then(values => {
-      values;
-      this.charactersList = values;
-    }).catch(error => {
-      error;
-    });
-  }
+    allPromise
+      .then((values) => {
+        values;
+        this.charactersList = values;
+      })
+      .catch((error) => {
+        error;
+      });
+  },
 };
 </script>
 
