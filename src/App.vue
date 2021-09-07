@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header class="app-header-pokemon" />
     <router-view />
   </div>
 </template>
@@ -24,5 +24,11 @@ export default {
   text-align: center;
   color: $color-light-gray;
   background-color: $color-dark-gray;
+}
+
+@media (max-width: 1000px) {
+  .app-header-pokemon {
+    display: none;
+  }
 }
 </style>
