@@ -5,7 +5,7 @@
       class="header-pokemon__title"
       @click="goHomepage"
     >
-      <strong>Got to Homepage</strong>
+      <strong>Go to Homepage</strong>
     </h1>
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
     margin: 0px;
     padding: 20px;
     font-size: 50px;
-    text-align: left;
+    text-align: right;
     color: yellow;
     cursor: pointer;
   }
