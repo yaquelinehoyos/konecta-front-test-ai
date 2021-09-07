@@ -79,11 +79,37 @@ export default {
     height: auto;
     @include character-card;
   }
+
+  &__img {
+    &:hover {
+      -webkit-animation: spin 4s linear infinite;
+      -moz-animation: spin 4s linear infinite;
+      animation: spin 4s linear infinite;
+    }
+  }
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 1000px) {
   .character-view-pokemon {
-
     &__img {
       width: 100%;
       height: auto;
