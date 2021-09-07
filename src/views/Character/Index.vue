@@ -80,4 +80,18 @@ export default {
     @include character-card;
   }
 }
+
+@media (max-width: 1000px) {
+  .character-view-pokemon {
+
+    &__img {
+      width: 100%;
+      height: auto;
+    }
+
+    &__card {
+      flex-direction: column !important;
+    }
+  }
+}
 </style>
