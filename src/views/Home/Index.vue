@@ -43,8 +43,13 @@ export default {
     };
   },
   async created() {
-    if (this.$route.params.page) {
-      await this.getCharacters(this.$route.params.page);
+    let page = this.$route.params.page;
+    if (page) {
+      if (page == 1 || page == 2 || page == 3 || page == 4 || page == 5) {
+        await this.getCharacters(page);
+      } else {
+        this.$router.push({ name: "NotFound" });
+      }
     } else {
       await this.getCharacters(1);
     }
