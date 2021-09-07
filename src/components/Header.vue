@@ -1,5 +1,6 @@
 <template>
   <div class="header-pokemon">
+    <!-- the v-if directive is for show the title just in the pages that are not the homepage -->
     <h1
       v-if="$route.name != 'Home'"
       class="header-pokemon__title"
@@ -12,8 +13,11 @@
 
 <script>
 export default {
+  // the name is always necessary for navigate in the console-vue
   name: "HeaderPokemon",
   methods: {
+    // this is the method to redirect to the homepage
+    // 'NavigationDuplicated' is a very common error in vue router so we need to catch it just in case
     goHomepage() {
       this.$router.push({ name: "Home", params: { page: 1 } }).catch((err) => {
         if (
@@ -31,6 +35,7 @@ export default {
 </script>
 
 <style lang="scss">
+// We must set the property "lang='scss'" so that the component knows that we are using sass.
 .header-pokemon {
   min-height: 30vh;
   background-image: url("../assets/images/header-img.jpg");

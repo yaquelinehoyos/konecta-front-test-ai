@@ -1,3 +1,5 @@
+// mixins are used to encapsulate styles that can be dropped into a single style rule
+
 @mixin character-card {
     display: flex;
     flex-direction: row;
