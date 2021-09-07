@@ -22,6 +22,7 @@ export default {
         return response.data.results;
       } catch (err) {
         console.log(err);
+        return err.response;
       }
     },
     async getSingleCharacter(_, name) {
@@ -32,6 +33,7 @@ export default {
         return response;
       } catch (err) {
         console.log(err);
+        return err.response;
       }
     },
   },
