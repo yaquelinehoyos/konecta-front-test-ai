@@ -1,12 +1,32 @@
 <template>
   <div class="header-pokemon">
-    <h1 class="header-pokemon__title"><strong>POKÉMON</strong></h1>
+    <h1
+      v-if="$route.name != 'Home'"
+      class="header-pokemon__title"
+      @click="goHomepage"
+    >
+      <strong>Got to Homepage</strong>
+    </h1>
   </div>
 </template>
 
 <script>
 export default {
   name: "HeaderPokemon",
+  methods: {
+    goHomepage() {
+      this.$router.push({ name: "Home", params: { page: 1 } }).catch((err) => {
+        if (
+          err.name !== "NavigationDuplicated" &&
+          !err.message.includes(
+            "Avoided redundant navigation to current location"
+          )
+        ) {
+          // logError(err);
+        }
+      });
+    },
+  },
 };
 </script>
 
@@ -26,6 +46,7 @@ export default {
     font-size: 50px;
     text-align: left;
     color: yellow;
+    cursor: pointer;
   }
 }
 </style>

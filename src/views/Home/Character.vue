@@ -1,5 +1,9 @@
 <template>
-  <div v-if="thereIsData" class="character-pokemon">
+  <div
+    v-if="thereIsData"
+    class="character-pokemon"
+    @click="goToCharacter(character.name)"
+  >
     <img
       class="character-pokemon__img"
       :src="`https://assets.pokemon.com/assets/cms2/img/pokedex/full//${imageId}.png`"
@@ -18,7 +22,7 @@
 </template>
 
 <script>
-import Stats from "./Stats.vue";
+import Stats from "@/components/Stats.vue";
 
 export default {
   name: "CharacterPokemon",
@@ -46,6 +50,22 @@ export default {
       this.imageId = this.character.id;
     }
     this.thereIsData = true;
+  },
+  methods: {
+    goToCharacter(name) {
+      this.$router
+        .push({ name: "Character", params: { name: name } })
+        .catch((err) => {
+          if (
+            err.name !== "NavigationDuplicated" &&
+            !err.message.includes(
+              "Avoided redundant navigation to current location"
+            )
+          ) {
+            // logError(err);
+          }
+        });
+    },
   },
 };
 </script>
