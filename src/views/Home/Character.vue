@@ -12,6 +12,8 @@
       <h3>
         <strong>{{ character.name.toUpperCase() }}</strong>
       </h3>
+
+      <!-- the v-for directive: for every charcater stat, it is going to create a new componente "stats" -->
       <Stats
         v-for="(stat, index) in character.stats"
         :key="index"
@@ -22,10 +24,13 @@
 </template>
 
 <script>
+// we nee to import every component that we are going to use
 import Stats from "@/components/Stats.vue";
 
 export default {
+  // the name is always necessary for navigate in the console-vue
   name: "CharacterPokemon",
+  // properties are the inheritance of the parent components
   props: {
     character: {
       type: Object,
@@ -35,13 +40,16 @@ export default {
   components: {
     Stats,
   },
+  // in data we store all the component variables
   data() {
     return {
       imageId: null,
       thereIsData: false,
     };
   },
+  // the created function is a life cicle in vue
   async created() {
+    // to get the image we need to concatenate the zeros
     if (this.character.id.toString().length == 1) {
       this.imageId = "00" + this.character.id;
     } else if (this.character.id.toString().length == 2) {
@@ -52,6 +60,8 @@ export default {
     this.thereIsData = true;
   },
   methods: {
+    // this is the method to redirect to the character view and we pass the name param
+    // 'NavigationDuplicated' is a very common error in vue router so we need to catch it just in case
     goToCharacter(name) {
       this.$router
         .push({ name: "Character", params: { name: name } })
@@ -71,9 +81,11 @@ export default {
 </script>
 
 <style lang="scss">
+// We must set the property "lang='scss'" so that the component knows that we are using sass.
 .character-pokemon {
   width: 600px;
   height: auto;
+  //we are using the card mixin
   @include character-card;
 
   &__img {
