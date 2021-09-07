@@ -10,7 +10,9 @@
 
 <script>
 export default {
+  // the name is always necessary for navigate in the console-vue
   name: "StatsPokemon",
+  // properties are the inheritance of the parent components
   props: {
     stat: {
       type: Object,
@@ -21,6 +23,7 @@ export default {
 </script>
 
 <style lang="scss">
+// We must set the property "lang='scss'" so that the component knows that we are using sass.
 .stats-pokemon {
   width: 100%;
   padding: 10px;
