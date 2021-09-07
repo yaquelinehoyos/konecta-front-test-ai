@@ -1,45 +1,54 @@
 <template>
-  <div class="homepage-pokemon">
-    <Paginator
-      @paginate="paginateHandler"
-      class="homepage-pokemon__paginator"
-    />
-    <div class="homepage-pokemon__characters-content">
-      <Character
-        class="homepage-pokemon__character"
-        v-for="character in charactersList"
-        :key="character.data.id"
-        :character="character.data"
+  <div>
+    <div v-if="thereIsData" class="homepage-pokemon">
+      <Paginator
+        @paginate="paginateHandler"
+        class="homepage-pokemon__paginator"
+      />
+      <div class="homepage-pokemon__characters-content">
+        <Character
+          class="homepage-pokemon__character"
+          v-for="character in charactersList"
+          :key="character.data.id"
+          :character="character.data"
+        />
+      </div>
+      <Paginator
+        @paginate="paginateHandler"
+        class="homepage-pokemon__paginator"
       />
     </div>
-    <Paginator
-      @paginate="paginateHandler"
-      class="homepage-pokemon__paginator"
-    />
+    <div v-else>
+      <Loading />
+    </div>
   </div>
 </template>
 
 <script>
+import Loading from "@/components/Loading";
 import Character from "./Character.vue";
 import Paginator from "./Paginator.vue";
 
 export default {
   name: "HomepagePokemon",
   components: {
+    Loading,
     Character,
     Paginator,
   },
   data() {
     return {
       charactersList: null,
+      thereIsData: false,
     };
   },
   async created() {
     if (this.$route.params.page) {
-      this.getCharacters(this.$route.params.page);
+      await this.getCharacters(this.$route.params.page);
     } else {
-      this.getCharacters(1);
+      await this.getCharacters(1);
     }
+    this.thereIsData = true;
   },
   methods: {
     async getCharacters(i) {
@@ -101,6 +110,7 @@ export default {
 
   &__character {
     justify-self: center;
+    cursor: pointer;
   }
 
   &__paginator {
